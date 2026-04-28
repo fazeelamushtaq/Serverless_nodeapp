@@ -1,0 +1,24 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: serverlessapplambda
+service: express-serverless-api
+
+provider: 
+  name: aws
+  runtime: nodejs22.x
+  region: ap-southeast-1
+  stage: api
+
+functions: 
+  app:
+    handler: lambda.handler
+    events: 
+      - http: 
+          path: /{proxy+}
+          method: ANY
+
+
+package: 
+  individually: true
+
+plugins:
+  - serverless-offline
